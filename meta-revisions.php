@@ -23,14 +23,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-if (!function_exists('add_meta_versioning')) {
-	function add_meta_versioning() {
-		meta_revisions_track_taxonomy_field('post_tag', 'Tags');
-		meta_revisions_track_taxonomy_field('category', 'Categories');
-	}
-	add_action('Meta_Revisions_init', 'add_meta_versioning');
-}
-
 Meta_Revisions::init();
 
 class Meta_Revisions {
