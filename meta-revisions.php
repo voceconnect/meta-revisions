@@ -252,7 +252,6 @@ class Meta_Revisions {
 	 * @param int $revision_id
 	 */
 	public static function save_meta_to_revision($post_meta, $revision_id) {
-		die("HERE");
 		foreach ($post_meta as $meta_key => $meta_values) {
 
 			if (!is_array($meta_values)) {
