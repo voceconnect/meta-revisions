@@ -10,7 +10,7 @@ Author URI: http://www.voceconnect.com
 Copyright 2011  Voce  (email : john@voceconnect.com)
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -205,6 +205,7 @@ class Meta_Revisions {
 		// if this is a post edit, save the revision with current metadata
 		if (self::is_post_edit_screen() && $result) {
 			$post_id = intval($_POST['post_ID']);
+			do_action('pre_version_meta', $post_id);
 			self::version_post_meta_and_terms($post_id);
 		}
 	}
