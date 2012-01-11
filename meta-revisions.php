@@ -214,6 +214,7 @@ class Meta_Revisions {
 	 * Meat and potatoes of the Meta Versioning plugin, saves post meta and tax terms to a new revision.
 	 *
 	 * @param int $post_id
+	 * @return int $revision_id
 	 */
 	public static function version_post_meta_and_terms($post_id) {
 		$post_type = get_post_type($post_id);
@@ -236,6 +237,8 @@ class Meta_Revisions {
 		if ($revision_id && $tracked_terms) {
 			self::save_taxonomy_terms_to_revision($tracked_terms, $revision_id);
 		}
+
+		return $revision_id;
 	}
 
 	/**
