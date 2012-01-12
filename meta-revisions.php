@@ -205,7 +205,6 @@ class Meta_Revisions {
 		// if this is a post edit, save the revision with current metadata
 		if (self::is_post_edit_screen() && $result) {
 			$post_id = intval($_POST['post_ID']);
-			do_action('pre_version_meta', $post_id);
 			self::version_post_meta_and_terms($post_id);
 		}
 	}
@@ -220,6 +219,8 @@ class Meta_Revisions {
 		$post_type = get_post_type($post_id);
 		$post_meta = false;
 		$tracked_terms = false;
+
+		do_action('pre_version_meta', $post_id);
 
 		if (self::tracking_fields_for_post_type($post_type, self::POSTMETA_TYPE)) {
 			$post_meta = self::get_tracked_post_custom($post_id);
