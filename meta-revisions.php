@@ -198,13 +198,19 @@ class Meta_Revisions {
 	public static function check_admin_referer_action($action, $result) {
 		global $pagenow;
 
-		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		if (!$result || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+			return;
+		}
+
+		$post_id = isset($_POST['post_ID']) ? intval($_POST['post_ID']) : 0;
+
+		if (!self::tracking_fields_for_post_type(get_post_type($post_id))) {
 			return;
 		}
 
 		// if this is a post edit, save the revision with current metadata
-		if (self::is_post_edit_screen() && $result) {
-			$post_id = intval($_POST['post_ID']);
+		$should_version_meta = apply_filters('meta_revisions_should_version_meta', (self::is_post_edit_screen() && $result), $post_id);
+		if ($should_version_meta) {
 			self::version_post_meta_and_terms($post_id);
 		}
 	}
